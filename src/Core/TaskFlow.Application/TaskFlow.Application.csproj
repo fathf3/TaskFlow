@@ -16,4 +16,8 @@
     <ProjectReference Include="..\TaskFlow.Domain\TaskFlow.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="CQRS\Users\Commands\" />
+  </ItemGroup>
+
 </Project>

@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using TaskFlow.Application.CQRS.Users.Queries.GetActiveUser;
+using TaskFlow.Application.CQRS.Users.Queries.GetCurrentUser;
 using TaskFlow.Application.DTOs.UserDTOs;
 using TaskFlow.Application.Interfaces;
 
@@ -11,49 +14,30 @@ namespace TaskFlow.API.Controllers
     [Authorize]
     public class UsersController : ControllerBase
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IMediator _mediator;
 
-        public UsersController(IUserRepository userRepository)
+        public UsersController(IMediator mediator)
         {
-            _userRepository = userRepository;
+            _mediator = mediator;
         }
 
         [HttpGet]
         public async Task<ActionResult<List<UserDto>>> GetUsers()
         {
-            var users = await _userRepository.GetActiveUsersAsync();
-
-            var userDtos = users.Select(u => new UserDto
-            {
-                Id = u.Id,
-                FirstName = u.FirstName,
-                LastName = u.LastName,
-                Email = u.Email,
-                Role = u.Role
-            }).ToList();
-
-            return Ok(userDtos);
+            var users = await _mediator.Send(new GetActiveUsersQuery());
+            return Ok(users);
         }
 
         [HttpGet("me")]
         public async Task<ActionResult<UserDto>> GetCurrentUser()
         {
             var userId = GetCurrentUserId();
-            var user = await _userRepository.GetByIdAsync(userId);
+            var user = await _mediator.Send(new GetCurrentUserQuery(userId));
 
             if (user == null)
                 return NotFound();
 
-            var userDto = new UserDto
-            {
-                Id = user.Id,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                Email = user.Email,
-                Role = user.Role
-            };
-
-            return Ok(userDto);
+            return Ok(user);
         }
 
         private int GetCurrentUserId()

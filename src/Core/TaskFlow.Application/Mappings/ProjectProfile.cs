@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using TaskFlow.Application.CQRS.Tasks.Commands.CreateTask;
 using TaskFlow.Application.DTOs.ProjectDTOs;
+using TaskFlow.Application.DTOs.TaskDTOs;
 using TaskFlow.Application.DTOs.UserDTOs;
 using TaskFlow.Domain.Entities;
 
@@ -19,6 +21,11 @@ namespace TaskFlow.Application.Mappings
             CreateMap<ProjectMember, ProjectMemberDto>()
            .ForMember(dest => dest.User, opt => opt.MapFrom(src => src.User));
             CreateMap<AddMemberDto, ProjectMember>();
+            
+            CreateMap<TaskItem, TaskDto>().ReverseMap();
+            CreateMap<CreateTaskCommand, TaskItem>(); 
+
+
 
         }
     }
