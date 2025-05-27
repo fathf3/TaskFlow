@@ -5,11 +5,12 @@ using System.Linq;
 using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
+using TaskFlow.Application.Interfaces;
 using TaskFlow.Domain.Entities;
 
 namespace TaskFlow.Infrastructure.Data
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : DbContext, IApplicationDbContext
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {

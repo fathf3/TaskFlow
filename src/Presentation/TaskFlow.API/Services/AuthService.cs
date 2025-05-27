@@ -2,7 +2,8 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using TaskFlow.API.DTOs.AuthDTOs;
+using TaskFlow.Application.DTOs.AuthDTOs;
+using TaskFlow.Application.DTOs.UserDTOs;
 using TaskFlow.Application.Interfaces;
 using TaskFlow.Domain.Entities;
 

@@ -3,7 +3,10 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using TaskFlow.Application;
 using TaskFlow.Application.Interfaces;
+using TaskFlow.Application.Mappings;
+using TaskFlow.Infrastructure;
 using TaskFlow.Infrastructure.Data;
 using TaskFlow.Infrastructure.Repositories;
 
@@ -12,13 +15,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to DI container
 builder.Services.AddControllers();
 
-// Database Configuration
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// Repository Pattern DI
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
+
+
+builder.Services.AddApplicationServices();
+builder.Services.AddInfrastructureServices(builder.Configuration);
 
 // Services
 builder.Services.AddScoped<TaskFlow.API.Services.AuthService>();

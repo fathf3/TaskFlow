@@ -13,5 +13,6 @@ namespace TaskFlow.Application.Interfaces
         Task<T> AddAsync(T entity);
         Task<T> UpdateAsync(T entity);
         Task DeleteAsync(int id);
+        Task<int> SaveAsync();
     }
 }

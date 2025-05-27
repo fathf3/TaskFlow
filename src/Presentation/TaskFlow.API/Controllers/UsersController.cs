@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
-using TaskFlow.API.DTOs.AuthDTOs;
+using TaskFlow.Application.DTOs.UserDTOs;
 using TaskFlow.Application.Interfaces;
 
 namespace TaskFlow.API.Controllers

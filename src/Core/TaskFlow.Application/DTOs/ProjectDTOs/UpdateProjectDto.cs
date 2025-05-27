@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace TaskFlow.API.DTOs.ProjectDTOs
+namespace TaskFlow.Application.DTOs.ProjectDTOs
 {
     public class UpdateProjectDto
     {
