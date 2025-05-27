@@ -53,5 +53,7 @@ namespace TaskFlow.Infrastructure.Repositories
                 await _context.SaveChangesAsync();
             }
         }
+        public async Task<int> SaveAsync()
+           => await _context.SaveChangesAsync();
     }
 }

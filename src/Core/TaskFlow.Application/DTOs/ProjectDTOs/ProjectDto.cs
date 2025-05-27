@@ -1,6 +1,11 @@
-﻿using TaskFlow.API.DTOs.AuthDTOs;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using TaskFlow.Application.DTOs.UserDTOs;
 
-namespace TaskFlow.API.DTOs.ProjectDTOs
+namespace TaskFlow.Application.DTOs.ProjectDTOs
 {
     public class ProjectDto
     {

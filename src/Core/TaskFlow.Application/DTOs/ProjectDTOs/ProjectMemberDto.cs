@@ -1,6 +1,6 @@
-﻿using TaskFlow.API.DTOs.AuthDTOs;
+﻿using TaskFlow.Application.DTOs.UserDTOs;
 
-namespace TaskFlow.API.DTOs.ProjectDTOs
+namespace TaskFlow.Application.DTOs.ProjectDTOs
 {
     public class ProjectMemberDto
     {
