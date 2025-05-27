@@ -19,6 +19,7 @@ namespace TaskFlow.Infrastructure
             // Repository Pattern DI
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IProjectRepository, ProjectRepository>();
+            services.AddScoped<ITaskRepository, TaskRepository>();
 
             // Database Configuration
 
