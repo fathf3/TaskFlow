@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Register from "./components/Register"; // En üste ekle
 import Login from "./components/Login"; // Login bileşenini içe aktar
+import ProjectDetail from "./pages/ProjectDetail";
 
 const queryClient = new QueryClient();
 
@@ -17,7 +18,8 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Index />} />
+          <Route path="/*" element={<Index />} />
+          <Route path="/projects/:id" element={<ProjectDetail />} />
           <Route path="/login" element={<Login />} /> {/* Login rotasını ekle */}
           <Route path="/register" element={<Register />} /> {/* Bunu ekle */}
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
