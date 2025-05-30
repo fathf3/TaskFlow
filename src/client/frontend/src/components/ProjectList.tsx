@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -16,11 +15,13 @@ import { Input } from '@/components/ui/input';
 import { NewProjectModal } from './NewProjectModal';
 import { apiService, Project } from '../services/api';
 import { useToast } from '@/hooks/use-toast';
+import { useNavigate } from 'react-router-dom';
 
 export const ProjectList = () => {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchProjects();
@@ -114,7 +115,11 @@ export const ProjectList = () => {
       {/* Projects Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {projects.map((project) => (
-          <Card key={project.id} className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer group">
+          <Card
+            key={project.id}
+            className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer group"
+            onClick={() => navigate(`/projects/${project.id}`)}
+          >
             <CardHeader className="pb-4">
               <div className="flex items-start justify-between">
                 <div className="flex-1">

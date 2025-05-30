@@ -13,15 +13,18 @@ namespace TaskFlow.API.Services
     {
         private readonly IUserRepository _userRepository;
         private readonly IConfiguration _configuration;
+        private readonly ILogger<AuthService> _logger;
 
-        public AuthService(IUserRepository userRepository, IConfiguration configuration)
+        public AuthService(IUserRepository userRepository, IConfiguration configuration, ILogger<AuthService> logger)
         {
             _userRepository = userRepository;
             _configuration = configuration;
+            _logger = logger;
         }
 
         public async Task<AuthResponseDto?> LoginAsync(LoginDto loginDto)
         {
+            _logger.LogInformation("LoginAsync started for {Email}", loginDto.Email);
             var user = await _userRepository.GetByEmailAsync(loginDto.Email);
 
             if (user == null || !VerifyPassword(loginDto.Password, user.PasswordHash))
