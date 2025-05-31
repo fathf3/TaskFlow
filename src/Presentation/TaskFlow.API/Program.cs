@@ -29,8 +29,7 @@ builder.Services.AddControllers();
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 
-// Services
-builder.Services.AddScoped<TaskFlow.API.Services.AuthService>();
+
 
 // JWT Authentication
 var jwtSettings = builder.Configuration.GetSection("JwtSettings");

@@ -7,8 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TaskFlow.Application.Interfaces;
+using TaskFlow.Application.Services;
 using TaskFlow.Infrastructure.Data;
 using TaskFlow.Infrastructure.Repositories;
+using TaskFlow.Infrastructure.Services;
 
 namespace TaskFlow.Infrastructure
 {
@@ -20,6 +22,11 @@ namespace TaskFlow.Infrastructure
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IProjectRepository, ProjectRepository>();
             services.AddScoped<ITaskRepository, TaskRepository>();
+
+            // Services DI
+            services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IPasswordHasher, PasswordHasher>();
+            services.AddScoped<IJwtService, JwtService>();
 
             // Database Configuration
 
