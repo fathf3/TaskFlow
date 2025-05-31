@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TaskFlow.API.Services;
 using TaskFlow.Application.DTOs.AuthDTOs;
+using TaskFlow.Application.Services;
 
 namespace YourNamespace.Controllers
 {
@@ -8,22 +8,21 @@ namespace YourNamespace.Controllers
     [Route("api/[controller]")]
     public class AuthController : ControllerBase
     {
-        private readonly AuthService _authService;
+        private readonly IAuthService _authService;
         private readonly ILogger<AuthController> _logger;
 
-        public AuthController(AuthService authService, ILogger<AuthController> logger)
+        public AuthController(IAuthService authService, ILogger<AuthController> logger)
         {
             _authService = authService;
             _logger = logger;
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<AuthResponseDto>> Login(LoginDto loginDto)
+        public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
         {
             _logger.LogInformation("Login attempt for email: {Email}", loginDto.Email);
 
             var result = await _authService.LoginAsync(loginDto);
-
             if (result == null)
             {
                 _logger.LogWarning("Login failed for email: {Email}", loginDto.Email);
@@ -35,12 +34,11 @@ namespace YourNamespace.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult<AuthResponseDto>> Register(RegisterDto registerDto)
+        public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
         {
             _logger.LogInformation("Register attempt for email: {Email}", registerDto.Email);
 
             var result = await _authService.RegisterAsync(registerDto);
-
             if (result == null)
             {
                 _logger.LogWarning("Register failed - user already exists for email: {Email}", registerDto.Email);
@@ -51,4 +49,5 @@ namespace YourNamespace.Controllers
             return Ok(result);
         }
     }
+
 }
